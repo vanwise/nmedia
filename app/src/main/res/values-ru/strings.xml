@@ -6,4 +6,9 @@
     <string name="description_heart_icon">Иконка сердца</string>
     <string name="description_repost_icon">Иконка репоста</string>
     <string name="description_views_icon">Иконка просмотров</string>
+    <string name="post_menu_remove">Удалить</string>
+    <string name="post_menu_edit">Редактировать</string>
+    <string name="post_text">Введите текст</string>
+    <string name="description_save_post">Сохранить текст</string>
+    <string name="content_is_blank_error">Введеный текст пуст</string>
 </resources>

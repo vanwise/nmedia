@@ -2,25 +2,13 @@ package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.R
 import ru.netology.nmedia.dto.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
     private var posts = listOf(
         Post(
-            id = 1,
+            id = 4,
             author = "Нетология. Университет интернет-профессий будущего",
-            authorAvatar = R.drawable.ic_netology_logo_48,
-            published = "21 мая в 18:36",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            likeCount = 10,
-            repostCount = 5,
-            viewCount = 5,
-        ),
-        Post(
-            id = 2,
-            author = "Нетология. Университет интернет-профессий будущего",
-            authorAvatar = R.drawable.ic_netology_logo_48,
             published = "21 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             likeCount = 10,
@@ -30,7 +18,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
         Post(
             id = 3,
             author = "Нетология. Университет интернет-профессий будущего",
-            authorAvatar = R.drawable.ic_netology_logo_48,
             published = "21 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             likeCount = 10,
@@ -38,9 +25,17 @@ class PostRepositoryInMemoryImpl : PostRepository {
             viewCount = 5,
         ),
         Post(
-            id = 4,
+            id = 2,
             author = "Нетология. Университет интернет-профессий будущего",
-            authorAvatar = R.drawable.ic_netology_logo_48,
+            published = "21 мая в 18:36",
+            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+            likeCount = 10,
+            repostCount = 5,
+            viewCount = 5,
+        ),
+        Post(
+            id = 1,
+            author = "Нетология. Университет интернет-профессий будущего",
             published = "21 мая в 18:36",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             likeCount = 10,
@@ -48,6 +43,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             viewCount = 5,
         ),
     )
+
+    private var nextId = posts.first().id + 1
 
     private val data = MutableLiveData(posts)
 
@@ -67,6 +64,23 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = posts.map {
             if (it.id == id) it.copy(repostCount = it.repostCount + 1) else it
         }
+        data.value = posts
+    }
+
+    override fun removeById(id: Int) {
+        posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        posts = if (post.id == 0) {
+            listOf(post.copy(id = nextId++, author = "Me", published = "Now")) + posts
+        } else {
+            posts.map {
+                if (it.id == post.id) it.copy(content = post.content) else it
+            }
+        }
+
         data.value = posts
     }
 }

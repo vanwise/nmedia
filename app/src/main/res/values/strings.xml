@@ -5,4 +5,9 @@
     <string name="description_heart_icon">Heart icon</string>
     <string name="description_repost_icon">Repost icon</string>
     <string name="description_views_icon">Views icon</string>
+    <string name="post_menu_remove">Remove</string>
+    <string name="post_menu_edit">Edit</string>
+    <string name="post_text">Enter text</string>
+    <string name="description_save_post">Save text</string>
+    <string name="content_is_blank_error">Content is blank</string>
 </resources>
