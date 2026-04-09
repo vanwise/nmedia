@@ -11,4 +11,7 @@
     <string name="post_text">Введите текст</string>
     <string name="description_save_post">Сохранить текст</string>
     <string name="content_is_blank_error">Введеный текст пуст</string>
+    <string name="description_edit_icon">Иконка редактирования</string>
+    <string name="post_edit_title">Редактирование сообщения</string>
+    <string name="description_cancel_icon">Иконка отмены редактирования</string>
 </resources>

@@ -10,4 +10,7 @@
     <string name="post_text">Enter text</string>
     <string name="description_save_post">Save text</string>
     <string name="content_is_blank_error">Content is blank</string>
+    <string name="description_edit_icon">Edit icon</string>
+    <string name="post_edit_title">Edit message</string>
+    <string name="description_cancel_icon">Cancel edit icon</string>
 </resources>

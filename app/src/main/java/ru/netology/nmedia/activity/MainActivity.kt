@@ -1,6 +1,8 @@
 package ru.netology.nmedia.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -53,9 +55,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 viewModel.saveContent(text.toString())
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
+                binding.editGroup.visibility = View.GONE
+                clearTextAndFocusFromPostInput(this)
             }
         }
 
@@ -66,7 +67,23 @@ class MainActivity : AppCompatActivity() {
                     setText("")
                     append(post.content)
                 }
+
+                binding.editGroup.visibility = View.VISIBLE
+                binding.editedMessage.text = post.content
             }
+        }
+
+        binding.cancelEdit.setOnClickListener {
+            binding.editGroup.visibility = View.GONE
+            clearTextAndFocusFromPostInput(binding.postInput)
+        }
+    }
+
+    private fun clearTextAndFocusFromPostInput(input: EditText) {
+        with(input) {
+            setText("")
+            clearFocus()
+            AndroidUtils.hideKeyboard(input)
         }
     }
 }

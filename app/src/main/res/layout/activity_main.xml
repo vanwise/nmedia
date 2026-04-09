@@ -13,11 +13,75 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/postInput"
+        app:layout_constraintBottom_toTopOf="@id/editWrapper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/card_post" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/editGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="editWrapper" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/postInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/list">
+
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_edit_icon"
+            android:padding="@dimen/common_spacing"
+            android:src="@drawable/ic_outline_edit_24"
+            app:layout_constraintStart_toStartOf="@id/editWrapper"
+            app:layout_constraintTop_toTopOf="@id/editWrapper" />
+
+        <TextView
+            android:id="@+id/editTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/post_edit_title"
+            android:textSize="@dimen/posts_edit_title_size"
+            app:layout_constraintBottom_toTopOf="@id/editedMessage"
+            app:layout_constraintEnd_toStartOf="@id/cancelEdit"
+            app:layout_constraintStart_toEndOf="@id/editIcon"
+            app:layout_constraintTop_toTopOf="@id/editWrapper"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/editedMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="@id/editWrapper"
+            app:layout_constraintEnd_toStartOf="@id/cancelEdit"
+            app:layout_constraintStart_toEndOf="@id/editIcon"
+            app:layout_constraintTop_toBottomOf="@id/editTitle"
+            tools:text="@string/post_edit_title" />
+
+        <ImageButton
+            android:id="@+id/cancelEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/description_cancel_icon"
+            android:padding="@dimen/common_spacing"
+            android:src="@drawable/ic_outline_cancel_24"
+            app:layout_constraintBottom_toBottomOf="@id/editWrapper"
+            app:layout_constraintEnd_toEndOf="@id/editWrapper"
+            app:layout_constraintTop_toTopOf="@id/editWrapper" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/postInput"
@@ -30,7 +94,8 @@
         android:padding="@dimen/common_spacing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/postSave"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editWrapper" />
 
     <ImageButton
         android:id="@+id/postSave"
