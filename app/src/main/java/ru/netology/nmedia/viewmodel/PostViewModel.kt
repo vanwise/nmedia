@@ -29,6 +29,10 @@ class PostViewModel : ViewModel() {
                 repository.save(post.copy(content = trimmed))
             }
         }
+        resetEdited()
+    }
+
+    fun resetEdited() {
         edited.value = empty
     }
 }

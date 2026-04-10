@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cancelEdit.setOnClickListener {
+            viewModel.resetEdited()
             binding.editGroup.visibility = View.GONE
             clearTextAndFocusFromPostInput(binding.postInput)
         }
