@@ -40,14 +40,13 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likeCount.text = formatCount(post.likeCount)
-            repostCount.text = formatCount(post.repostCount)
+            repostButton.text = formatCount(post.repostCount)
             viewCount.text = formatCount(post.viewCount)
 
+            likesButton.isChecked = post.likedByMe
+            likesButton.text = formatCount(post.likeCount)
+
             avatar.setImageResource(post.authorAvatar)
-            likesButton.setImageResource(
-                if (post.likedByMe) R.drawable.ic_heart_filled_24 else R.drawable.ic_heart_24
-            )
 
             likesButton.setOnClickListener { listener.onLikeById(post.id) }
             repostButton.setOnClickListener { listener.onRepostById(post.id) }

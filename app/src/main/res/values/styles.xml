@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.AppTheme.CommonButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="Widget.AppTheme.IconButton" parent="Widget.AppTheme.CommonButton">
+        <item name="android:paddingRight">12dp</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+</resources>
