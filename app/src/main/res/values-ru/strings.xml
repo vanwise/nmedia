@@ -13,5 +13,6 @@
     <string name="content_is_blank_error">Введеный текст пуст</string>
     <string name="description_edit_icon">Иконка редактирования</string>
     <string name="post_edit_title">Редактирование сообщения</string>
-    <string name="description_cancel_icon">Иконка отмены редактирования</string>
+    <string name="description_add_new_post">Добавить новый пост</string>
+    <string name="ok">Хорошо</string>
 </resources>
