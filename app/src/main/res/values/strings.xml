@@ -14,4 +14,7 @@
     <string name="post_edit_title">Edit message</string>
     <string name="description_add_new_post">Add new post</string>
     <string name="ok">OK</string>
+    <string name="description_video_preview">Video preview</string>
+    <string name="description_video_preview_icon">Video preview icon</string>
+    <string name="choose_app_for_play_video">Choose app for play video</string>
 </resources>

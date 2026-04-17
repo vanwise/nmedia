@@ -15,4 +15,7 @@
     <string name="post_edit_title">Редактирование сообщения</string>
     <string name="description_add_new_post">Добавить новый пост</string>
     <string name="ok">Хорошо</string>
+    <string name="description_video_preview">Превью видео</string>
+    <string name="description_video_preview_icon">Иконка превью видео</string>
+    <string name="choose_app_for_play_video">Выберите приложение для просмотра видео</string>
 </resources>

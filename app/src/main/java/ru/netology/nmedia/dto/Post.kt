@@ -12,4 +12,5 @@ data class Post(
     val repostCount: Int = 0,
     val viewCount: Int = 0,
     val likedByMe: Boolean = false,
+    val video: String? = ""
 )

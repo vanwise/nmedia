@@ -63,6 +63,36 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar, published, menu" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/videoPreviewGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="videoPreview,videoPreviewIcon"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/videoPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/description_video_preview"
+        android:src="@drawable/masha_and_bear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+    <ImageView
+        android:id="@+id/videoPreviewIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/description_video_preview_icon"
+        android:src="@drawable/ic_outline_auto_read_play_24"
+        app:layout_constraintBottom_toBottomOf="@id/videoPreview"
+        app:layout_constraintEnd_toEndOf="@id/videoPreview"
+        app:layout_constraintStart_toStartOf="@id/videoPreview"
+        app:layout_constraintTop_toTopOf="@id/videoPreview" />
+
     <TextView
         android:id="@+id/content"
         android:layout_width="0dp"
@@ -72,7 +102,7 @@
         app:layout_constraintBottom_toTopOf="@id/contentBarrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/videoPreview"
         tools:text="@sample/posts.json/data/content" />
 
     <androidx.constraintlayout.widget.Barrier

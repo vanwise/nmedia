@@ -1,6 +1,7 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +17,7 @@ interface OnInteractionListener {
     fun onRepostById(postId: Int)
     fun onRemoveById(postId: Int)
     fun onEditById(post: Post)
+    fun onClickVideoPreview(video: String)
 }
 
 class PostAdapter(
@@ -42,6 +44,12 @@ class PostViewHolder(
             content.text = post.content
             repostButton.text = formatCount(post.repostCount)
             viewCount.text = formatCount(post.viewCount)
+
+            videoPreviewGroup.visibility =
+                if (post.video.isNullOrBlank()) View.GONE else View.VISIBLE
+            post.video?.let { video ->
+                videoPreview.setOnClickListener { listener.onClickVideoPreview(video) }
+            }
 
             likesButton.isChecked = post.likedByMe
             likesButton.text = formatCount(post.likeCount)

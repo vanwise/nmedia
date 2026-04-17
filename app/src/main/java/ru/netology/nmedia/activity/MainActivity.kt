@@ -1,11 +1,14 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -41,6 +44,15 @@ class MainActivity : AppCompatActivity() {
             override fun onEditById(post: Post) {
                 viewModel.editById(post)
                 newPostLauncher.launch(post.content)
+            }
+
+            override fun onClickVideoPreview(video: String) {
+                val intent = Intent(Intent.ACTION_VIEW, video.toUri())
+                val intentWithChooser = Intent.createChooser(
+                    intent,
+                    getString(R.string.choose_app_for_play_video)
+                )
+                startActivity(intentWithChooser)
             }
         })
 
