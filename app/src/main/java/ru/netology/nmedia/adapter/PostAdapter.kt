@@ -17,6 +17,7 @@ interface OnInteractionListener {
     fun onRepostById(postId: Int)
     fun onRemoveById(postId: Int)
     fun onEditById(post: Post)
+    fun onClick(postId: Int)
     fun onClickVideoPreview(video: String)
 }
 
@@ -58,6 +59,8 @@ class PostViewHolder(
 
             likesButton.setOnClickListener { listener.onLikeById(post.id) }
             repostButton.setOnClickListener { listener.onRepostById(post.id) }
+
+            main.setOnClickListener { listener.onClick(post.id) }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
