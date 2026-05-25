@@ -11,19 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NMedia">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.AppActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.NewPostActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
