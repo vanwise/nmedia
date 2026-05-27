@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -18,18 +19,35 @@ class NewPostFragment : Fragment() {
     ): View {
         val binding = FragmentNewPostBinding.inflate(layoutInflater)
         val viewModel by activityViewModels<PostViewModel>()
+        val hasTextArg = arguments?.textArg != null
 
-        arguments?.textArg.let { text ->
-            with(binding) {
-                AndroidUtils.showKeyboard(edit)
+        with(binding) {
+            val existedText = if (hasTextArg) {
+                editGroup.visibility = View.VISIBLE
+                arguments?.textArg
+            } else {
+                viewModel.draftText
+            }
 
-                if (!text.isNullOrBlank()) {
-                    editGroup.visibility = View.VISIBLE
+            AndroidUtils.showKeyboard(edit)
+            existedText?.let { text ->
+                if (text.isNotBlank()) {
                     editedMessage.text = text
                     edit.append(text)
                 }
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(!hasTextArg) {
+                override fun handleOnBackPressed() {
+                    val text = binding.edit.text.toString()
+                    if (text.isNotBlank()) {
+                        viewModel.draftText = text
+                    }
+                    remove()
+                }
+            })
 
         binding.save.setOnClickListener {
             val text = binding.edit.text.toString()

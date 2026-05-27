@@ -15,6 +15,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val data = repository.get()
 
     val edited = MutableLiveData(empty)
+    var draftText: String? = null
 
     fun likeById(id: Int) = repository.likeById(id)
 
@@ -31,6 +32,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             val trimmed = content.trim()
             if (post.content != trimmed) {
                 repository.save(post.copy(content = trimmed))
+                if (post.id == 0) {
+                    draftText = null
+                }
             }
         }
         resetEdited()
