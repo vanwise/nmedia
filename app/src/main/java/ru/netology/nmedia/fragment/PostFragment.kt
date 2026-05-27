@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
-import ru.netology.nmedia.adapter.PostAdapter
+import ru.netology.nmedia.adapter.PostViewHolder
 import ru.netology.nmedia.databinding.FragmentPostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.fragment.NewPostFragment.Companion.textArg
@@ -26,7 +26,7 @@ class PostFragment : Fragment() {
         val viewModel by activityViewModels<PostViewModel>()
 
         arguments?.postIdArg?.let { postId ->
-            val adapter = PostAdapter(object : OnInteractionListener {
+            val holder = PostViewHolder(binding.card, object : OnInteractionListener {
                 override fun onLikeById(postId: Int) = viewModel.likeById(postId)
 
                 override fun onRepostById(postId: Int) = viewModel.repostById(postId)
@@ -54,10 +54,9 @@ class PostFragment : Fragment() {
                 }
             })
 
-            binding.list.adapter = adapter
             viewModel.data.observe(viewLifecycleOwner) { posts ->
-                val post = posts.find { it.id == postId }
-                post.let { adapter.submitList((listOf(it))) }
+                val post = posts.find { it.id == postId } ?: return@observe
+                holder.bind(post)
             }
         }
 
