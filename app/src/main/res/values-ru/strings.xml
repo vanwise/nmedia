@@ -18,4 +18,8 @@
     <string name="description_video_preview">Превью видео</string>
     <string name="description_video_preview_icon">Иконка превью видео</string>
     <string name="choose_app_for_play_video">Выберите приложение для просмотра видео</string>
+    <string name="channel_remote_name">Уведомления с сервера</string>
+    <string name="channel_remote_description">Уведомления с удалённого сервера</string>
+    <string name="notification_user_liked">Пользователь %1$s лайкнул пост %2$s</string>
+    <string name="google_play_unavailable">Google Api недоступен</string>
 </resources>
