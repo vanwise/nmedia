@@ -39,9 +39,32 @@ class FCMService : FirebaseMessagingService() {
         message.data[action]?.let {
             when (Action.fromString(it)) {
                 Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+                Action.NEW_POST -> handleNewPostAdd(
+                    gson.fromJson(
+                        message.data[content],
+                        NewPost::class.java
+                    )
+                )
+
                 null -> println("Message received with unknown action: $it")
             }
         }
+    }
+
+    private fun handleNewPostAdd(newPost: NewPost) {
+        val notification =
+            NotificationCompat.Builder(this, channelId).setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(
+                    getString(
+                        R.string.notification_new_post,
+                        newPost.author,
+                    )
+                )
+                .setContentText(newPost.content)
+                .setStyle(NotificationCompat.BigTextStyle().bigText(newPost.content))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT).build()
+
+        notify(notification)
     }
 
     private fun handleLike(content: Like) {
@@ -70,7 +93,8 @@ class FCMService : FirebaseMessagingService() {
 }
 
 enum class Action {
-    LIKE;
+    LIKE,
+    NEW_POST;
 
     companion object {
         fun fromString(value: String): Action? {
@@ -84,4 +108,10 @@ data class Like(
     val userName: String,
     val postId: Long,
     val postAuthor: String,
+)
+
+data class NewPost(
+    val id: Long,
+    val author: String,
+    val content: String,
 )
